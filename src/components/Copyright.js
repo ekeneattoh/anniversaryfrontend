@@ -8,7 +8,7 @@ export default function Copyright() {
             {'Copyright © '}
 
             {new Date().getFullYear()}
-            {'. Built with '}
+            {'. Ekene Attoh'}
 
         </Typography>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './assets/nchetaLogo.png';
 import './App.css';
-import CreateAnniversary from './containers/CreateAnniversary.js'
+import LandingPage from './components/LandingPage.js'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <CreateAnniversary />
+      <LandingPage />
     </div>
   );
 }
