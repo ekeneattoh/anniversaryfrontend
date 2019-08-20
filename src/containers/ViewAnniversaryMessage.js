@@ -61,8 +61,8 @@ class ViewAnniversaryMessage extends Component {
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5">
-                        View Anniversary Message
+                    <Typography component="h1" variant="h5" color="secondary">
+                        View Anniversary
                     </Typography>
                     <form className={classes.form} noValidate>
                         <Grid container spacing={2}>

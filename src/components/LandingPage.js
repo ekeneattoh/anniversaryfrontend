@@ -19,8 +19,7 @@ class LandingPage extends Component {
             when the switch is toggled, Find Card will be set to True
             */
             checked: false,
-            checkValue: "saveAnniversary",
-            checkText: "Find Card?",
+            checkText: "View an Anniversary",
 
         };
 
@@ -36,10 +35,10 @@ class LandingPage extends Component {
 
             if (this.state.checked === true) {
 
-                this.setState({ checkText: "Save Anniversary" })
+                this.setState({ checkText: "Create an Anniversary" })
             }
             else if (this.state.checked === false) {
-                this.setState({ checkText: "Find Card?" })
+                this.setState({ checkText: "View an Anniversary" })
             }
         })
 
@@ -53,7 +52,12 @@ class LandingPage extends Component {
         return (
 
             <div>
-                <CreateAnniversary />
+                {this.state.checked === false ?
+                    (<CreateAnniversary />)
+                    :
+                    <ViewAnniversaryMessage />
+                }
+
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography color="secondary">{this.state.checkText}</Typography>
