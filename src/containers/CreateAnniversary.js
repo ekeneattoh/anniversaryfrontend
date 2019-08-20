@@ -61,7 +61,7 @@ class CreateAnniversary extends Component {
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5">
+                    <Typography component="h1" variant="h5" color="secondary">
                         Create Anniversary
                     </Typography>
                     <form className={classes.form} noValidate>
