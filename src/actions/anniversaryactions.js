@@ -47,7 +47,7 @@ export function getAnniversaryData(data) {
 
     return function (dispatch) {
         return axios({
-            method: 'get',
+            method: 'post',
             url: ncheta_backend + `/anniversarymessage`,
             data: data
 

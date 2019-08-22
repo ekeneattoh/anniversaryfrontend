@@ -9,6 +9,12 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import { withStyles } from "@material-ui/core/styles";
 
 //redux imports
@@ -39,8 +45,35 @@ const styles = theme => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    closeButton: {
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.palette.grey[500],
+    },
+    root: {
+        margin: 0,
+        padding: theme.spacing(2),
+    },
 
 });
+
+//dialog
+const DialogTitle = withStyles(styles)(props => {
+    const { children, classes, onClose } = props;
+    return (
+        <MuiDialogTitle disableTypography className={classes.root}>
+            <Typography variant="h6">{children}</Typography>
+        </MuiDialogTitle>
+    );
+});
+
+const DialogContent = withStyles(theme => ({
+    root: {
+        padding: theme.spacing(2),
+    },
+}))(MuiDialogContent);
+
 
 class ViewAnniversaryMessage extends Component {
 
@@ -48,12 +81,56 @@ class ViewAnniversaryMessage extends Component {
         super(props);
         this.state = {
 
+            referenceId: "",
+            show_spinner: false,
+            open: false
+
         };
 
         // This binding is necessary to make `this` work in the callback
-        // this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         // this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    handleChange = name => event => {
+        // console.log(name)
+        this.setState({
+            [name]: event.target.value
+        });
+    };
+
+    handleGetnniversary = (event) => {
+
+        event.preventDefault();
+
+        //show the spinner
+        this.setState({ show_spinner: true });
+
+        let data = {
+            fileName: this.state.referenceId.trim()
+        };
+        this.props.getAnniversaryData(data).then(() => {
+            this.setState({ show_spinner: false });
+            this.handleClickOpen();
+        });
+
+    }
+
+    handleClickOpen = () => {
+        this.setState({ open: true })
+    };
+
+    handleClose = () => {
+        this.setState({ open: false })
+    };
+
+    clearApiMsg() {
+        setTimeout(() => {
+            this.props.clearAnniversaryMsg();
+        }, 3000); //3 seconds
+    }
+
+
 
     render() {
 
@@ -71,7 +148,44 @@ class ViewAnniversaryMessage extends Component {
                     <Typography component="h1" variant="h5" color="secondary">
                         View Anniversary
                     </Typography>
-                    <form className={classes.form} noValidate>
+
+                    {this.state.show_spinner ? (
+                        <CircularProgress className={classes.progress} color="secondary" />
+                    ) : null}
+
+                    {/* dialog code */}
+                    {msg ?
+
+                        <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open}>
+                            <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+                                From {msg.clientName}
+                            </DialogTitle>
+                            <DialogContent dividers>
+                                <Typography gutterBottom>
+                                    {msg.customMessage}
+                                </Typography>
+                                <Typography gutterBottom>
+
+                                    <Button variant="outlined" color="secondary" onClick={this.handleClose}>
+                                        Close
+                                    </Button>
+
+                                </Typography>
+                            </DialogContent>
+                        </Dialog>
+                        :
+                        null
+                    }
+
+                    {error ? (
+                        <Typography color="error" component="h1" variant="h5">
+                            {error}
+                            {this.clearApiMsg()}
+                        </Typography>
+
+                    ) : null}
+
+                    <form className={classes.form} onSubmit={this.handleGetnniversary}>
                         <Grid container spacing={2}>
 
                             <Grid item xs={12}>
@@ -83,6 +197,7 @@ class ViewAnniversaryMessage extends Component {
                                     label="Reference ID"
                                     name="referenceId"
                                     autoComplete="referenceId"
+                                    onChange={this.handleChange("referenceId")}
                                 />
                             </Grid>
                         </Grid>

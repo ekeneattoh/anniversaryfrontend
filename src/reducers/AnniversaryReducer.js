@@ -26,6 +26,8 @@ export const reduceAnniversary = (state = anniversary_state, action) => {
     case CLEARANNIVERSARYMSG:
       state.save_anniversary_api_msg = null;
       state.save_anniversary_api_err = null;
+      state.get_anniversary_api_msg = null;
+      state.get_anniversary_api_err = null;
       return { ...state };
     case GET_ANNIVERSARY_DATA:
       let anniversary_data = action.payload.data.result
