@@ -8,7 +8,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from "prop-types";
-import Paper from "@material-ui/core/Paper";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -105,7 +104,7 @@ class CreateAnniversary extends Component {
         var msg = this.props.msg;
         var error = this.props.error;
 
-        // console.log(msg)
+        // console.log(error)
 
         return (
             <Container component="main" maxWidth="xs">
@@ -123,20 +122,17 @@ class CreateAnniversary extends Component {
                     ) : null}
 
                     {msg ? (
-                        <Paper className={classes.root} elevation={1}>
-                            <Typography color="secondary" component="h1" variant="h5">
-                                {msg}
-                            </Typography>
+                        <Typography color="secondary" component="h1" variant="h5">
+                            {msg}
                             {this.clearApiMsg()}
-                        </Paper>
+                        </Typography>
                     ) : null}
                     {error ? (
-                        <Paper className={classes.root} elevation={1}>
-                            <Typography color="error" component="h1" variant="h5">
-                                {error}
-                            </Typography>
+                        <Typography color="error" component="h1" variant="h5">
+                            {error}
                             {this.clearApiMsg()}
-                        </Paper>
+                        </Typography>
+
                     ) : null}
 
                     <form className={classes.form} onSubmit={this.handleSaveAnniversary}>

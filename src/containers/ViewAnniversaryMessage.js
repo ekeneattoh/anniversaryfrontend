@@ -8,7 +8,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from "prop-types";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { withStyles } from "@material-ui/core/styles";
+
+//redux imports
+import { connect } from "react-redux";
+import { getAnniversaryData, clearAnniversaryMsg } from "../actions/anniversaryactions"
 
 const styles = theme => ({
 
@@ -53,6 +58,8 @@ class ViewAnniversaryMessage extends Component {
     render() {
 
         const { classes } = this.props;
+        var msg = this.props.msg;
+        var error = this.props.error;
 
         return (
             <Container component="main" maxWidth="xs">
@@ -97,8 +104,22 @@ class ViewAnniversaryMessage extends Component {
 
 }
 
+function mapStateToProps(state) {
+    // console.log(state)
+    return {
+        error: state.anniversary.get_anniversary_api_err,
+        msg: state.anniversary.get_anniversary_api_msg
+    };
+}
+
 ViewAnniversaryMessage.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ViewAnniversaryMessage);
+const StylesViewAnniversaryMessage = withStyles(styles)(ViewAnniversaryMessage);
+
+export default connect(
+    mapStateToProps,
+    { getAnniversaryData, clearAnniversaryMsg }
+)(StylesViewAnniversaryMessage);
+
