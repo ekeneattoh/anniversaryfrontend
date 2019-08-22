@@ -103,7 +103,7 @@ class LandingPage extends Component {
                     </DialogTitle>
                     <DialogContent dividers>
                         <Typography gutterBottom>
-                            Ncheta is an app that allows you to save anniversary dates and a custom message (like birthdays weedding anniversaries)
+                            Ncheta is an app that allows you to save anniversary dates and a custom message (like birthdays, wedding anniversaries...)
                             of your loved ones, and will send a link via email to that loved one to view your custom message when that date arrives.
                         </Typography>
                         <Typography gutterBottom>
