@@ -107,9 +107,11 @@ class LandingPage extends Component {
                             of your loved ones, and will send a link via email to that loved one to view your custom message when that date arrives.
                         </Typography>
                         <Typography gutterBottom>
-                        You never again have to rush to pick up a card last minute, thanks to Ncheta
-                            You do however have to remember to save the anniversary, at least one day before the anniversary date.
+                            You never again have to rush to pick up a card last minute, thanks to Ncheta.
                         </Typography >
+                        <Typography gutterBottom>
+                            You do however have to remember to save the anniversary, at least one day before the anniversary date.
+                        </Typography>
                         <Typography gutterBottom>
 
                             <Button variant="outlined" color="secondary" onClick={this.handleClose}>
