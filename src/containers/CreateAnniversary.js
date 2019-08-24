@@ -196,7 +196,7 @@ class CreateAnniversary extends Component {
                                     required
                                     fullWidth
                                     id="anniversaryDate"
-                                    label="Recipient's Anniversary (mm-dd)"
+                                    label="Recipient's Anniversary mm-dd (01-01)"
                                     name="anniversaryDate"
                                     autoComplete="ranniversaryDate"
                                     value={this.state.anniversaryDate}
