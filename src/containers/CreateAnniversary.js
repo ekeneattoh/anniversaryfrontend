@@ -65,7 +65,7 @@ class CreateAnniversary extends Component {
     }
 
     handleChange = name => event => {
-        // console.log(event.target.value)
+        console.log(name)
         this.setState({
             [name]: event.target.value
         });
@@ -209,6 +209,19 @@ class CreateAnniversary extends Component {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="customMessag"
+                                    label="Custom Message"
+                                    name="customMessage"
+                                    autoComplete="customMessage"
+                                    value={this.state.customMessage}
+                                    onChange={this.handleChange("customMessage")}
                                 />
                             </Grid>
 
