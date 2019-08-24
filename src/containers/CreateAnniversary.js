@@ -39,11 +39,6 @@ const styles = theme => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
-    datePicker: {
-        width: 200,
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-    }
 
 });
 
@@ -199,32 +194,18 @@ class CreateAnniversary extends Component {
                                     onChange={this.handleChange("recipientEmail")}
                                 />
                             </Grid>
-                            {/* <Grid item xs={12}>
+                            <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
                                     required
                                     fullWidth
                                     id="anniversaryDate"
-                                    label="Recipient's Anniversary mm-dd (01-01)"
-                                    name="anniversaryDate"
-                                    autoComplete="anniversaryDate"
-                                    value={this.state.anniversaryDate}
-                                    onChange={this.handleChange("anniversaryDate")}
-                                />
-                            </Grid> */}
-                            <Grid item xs={12}>
-                                <TextField
-                                    id="anniversaryDate"
                                     label="Anniversary Date"
-                                    type="date"
-                                    required
-                                    variant="outlined"
-                                    defaultValue="2017-05-24"
                                     name="anniversaryDate"
+                                    type="date"
                                     autoComplete="anniversaryDate"
                                     value={this.state.anniversaryDate}
                                     onChange={this.handleChange("anniversaryDate")}
-                                    className={classes.datePicker}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
