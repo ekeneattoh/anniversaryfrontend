@@ -112,10 +112,10 @@ class LandingPage extends Component {
                         <Typography gutterBottom>
                             You do however have to remember to save the anniversary, at least one day before the anniversary date.
                         </Typography>
-                        <Typography color="error" gutterBottom>
+                        {/* <Typography color="error" gutterBottom>
                             Note anniversaries with single digit months and days must have a 0 prefix.
                             Example: January 1 should be 01-01, August 8 should be 08-08...
-                        </Typography>
+                        </Typography> */}
                         <Typography gutterBottom>
 
                             <Button variant="outlined" color="secondary" onClick={this.handleClose}>

@@ -39,6 +39,11 @@ const styles = theme => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    datePicker: {
+        width: 200,
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+    }
 
 });
 
@@ -65,7 +70,7 @@ class CreateAnniversary extends Component {
     }
 
     handleChange = name => event => {
-        // console.log(name)
+        // console.log(event.target.value)
         this.setState({
             [name]: event.target.value
         });
@@ -78,12 +83,16 @@ class CreateAnniversary extends Component {
         //show the spinner
         this.setState({ show_spinner: true });
 
+        //prepare the anniversary date
+        let anniversaryDateInput = this.state.anniversaryDate.trim().split("-")
+        const finalAnniversaryDate = anniversaryDateInput[1]+"-"+anniversaryDateInput[2]
+
         let data = {
             clientName: this.state.clientName.trim().toUpperCase(),
             clientEmail: this.state.clientEmail.trim(),
             recipientName: this.state.recipientName.trim().toUpperCase(),
             recipientEmail: this.state.recipientEmail.trim(),
-            anniversaryDate: this.state.anniversaryDate.trim(),
+            anniversaryDate: finalAnniversaryDate,
             customMessage: this.state.customMessage.trim()
         };
         this.props.saveAnniversary(data).then(() => {
@@ -190,7 +199,7 @@ class CreateAnniversary extends Component {
                                     onChange={this.handleChange("recipientEmail")}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            {/* <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
                                     required
@@ -198,22 +207,27 @@ class CreateAnniversary extends Component {
                                     id="anniversaryDate"
                                     label="Recipient's Anniversary mm-dd (01-01)"
                                     name="anniversaryDate"
-                                    autoComplete="ranniversaryDate"
+                                    autoComplete="anniversaryDate"
                                     value={this.state.anniversaryDate}
                                     onChange={this.handleChange("anniversaryDate")}
                                 />
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={12}>
                                 <TextField
-                                    variant="outlined"
+                                    id="anniversaryDate"
+                                    label="Anniversary Date"
+                                    type="date"
                                     required
-                                    fullWidth
-                                    id="customMessage"
-                                    label="Custom Message"
-                                    name="customMessage"
-                                    autoComplete="customMessage"
-                                    value={this.state.customMessage}
-                                    onChange={this.handleChange("customMessage")}
+                                    variant="outlined"
+                                    defaultValue="2017-05-24"
+                                    name="anniversaryDate"
+                                    autoComplete="anniversaryDate"
+                                    value={this.state.anniversaryDate}
+                                    onChange={this.handleChange("anniversaryDate")}
+                                    className={classes.datePicker}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 />
                             </Grid>
 
