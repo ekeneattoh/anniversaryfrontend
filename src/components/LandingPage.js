@@ -113,8 +113,7 @@ class LandingPage extends Component {
                             You do however have to remember to save the anniversary, at least one day before the anniversary date.
                         </Typography>
                         <Typography color="error" gutterBottom>
-                            Don't see a mail from Ncheta? Make sure to check your spam folder
-                            and mark the mail  as "Not Spam".
+                            Don't see a mail from Ncheta? Make sure to check your spam folder.
                         </Typography>
                         <Typography gutterBottom>
 
