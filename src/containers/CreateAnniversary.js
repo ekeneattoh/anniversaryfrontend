@@ -216,6 +216,8 @@ class CreateAnniversary extends Component {
                                     variant="outlined"
                                     required
                                     fullWidth
+                                    multiline
+                                    rows="4"
                                     id="customMessag"
                                     label="Custom Message"
                                     name="customMessage"
