@@ -159,7 +159,7 @@ class ViewAnniversaryMessage extends Component {
                             </DialogTitle>
                             <DialogContent dividers>
                                 <Typography gutterBottom>
-                                    <img src={msg.imageFile} alt="image" width="200" height="180" />
+                                    <img src={msg.imageFile} alt="image" width="200" height="300" />
                                 </Typography>
                                 <Typography gutterBottom>
                                     {msg.customMessage}
