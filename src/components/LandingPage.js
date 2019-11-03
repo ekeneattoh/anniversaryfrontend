@@ -62,7 +62,7 @@ class LandingPage extends Component {
 
     handleChange = () => {
 
-        //seState is async so wait until it return before doing updates
+        //seState is async so wait until it returns before doing updates
         this.setState({ checked: !this.state.checked }, () => {
 
             if (this.state.checked === true) {

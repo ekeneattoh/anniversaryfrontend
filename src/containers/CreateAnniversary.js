@@ -54,6 +54,7 @@ class CreateAnniversary extends Component {
             recipientEmail: "",
             anniversaryDate: "",
             customMessage: "",
+            imageFile: "",
 
             show_spinner: false
 
@@ -65,7 +66,7 @@ class CreateAnniversary extends Component {
     }
 
     handleChange = name => event => {
-        console.log(name)
+        // console.log(name)
         this.setState({
             [name]: event.target.value
         });
@@ -80,7 +81,7 @@ class CreateAnniversary extends Component {
 
         //prepare the anniversary date
         let anniversaryDateInput = this.state.anniversaryDate.trim().split("-")
-        const finalAnniversaryDate = anniversaryDateInput[1]+"-"+anniversaryDateInput[2]
+        const finalAnniversaryDate = anniversaryDateInput[1] + "-" + anniversaryDateInput[2]
 
         let data = {
             clientName: this.state.clientName.trim().toUpperCase(),
@@ -88,6 +89,7 @@ class CreateAnniversary extends Component {
             recipientName: this.state.recipientName.trim().toUpperCase(),
             recipientEmail: this.state.recipientEmail.trim(),
             anniversaryDate: finalAnniversaryDate,
+            imageFile: this.state.imageFile.trim(),
             customMessage: this.state.customMessage.trim()
         };
         this.props.saveAnniversary(data).then(() => {
@@ -100,6 +102,17 @@ class CreateAnniversary extends Component {
         setTimeout(() => {
             this.props.clearAnniversaryMsg();
         }, 3000); //3 seconds
+    }
+
+    encodeImageFileAsURL = event => {
+
+        const reader = new FileReader();
+
+        const img = event.target.files[0];
+
+        reader.onloadend =  () => this.setState({imageFile: reader.result})
+        reader.readAsDataURL(img);
+
     }
 
     render() {
@@ -210,6 +223,31 @@ class CreateAnniversary extends Component {
                                         shrink: true,
                                     }}
                                 />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <input
+                                    accept="image/*"
+                                    className={classes.input}
+                                    style={{ display: 'none' }}
+                                    id="imageFile"
+                                    name="imageFile"
+                                    multiple
+                                    type="file"
+                                    required
+                                    onChange={this.encodeImageFileAsURL}
+                                />
+                                <label htmlFor="imageFile">
+                                    <Button
+                                        variant="contained"
+                                        component="span"
+                                        className={classes.button}
+                                        fullWidth
+                                        color="primary"
+                                    >
+
+                                        Image Upload
+                                    </Button>
+                                </label>
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
