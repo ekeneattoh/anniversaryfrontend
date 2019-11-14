@@ -110,7 +110,7 @@ class CreateAnniversary extends Component {
 
         const img = event.target.files[0];
 
-        reader.onloadend =  () => this.setState({imageFile: reader.result})
+        reader.onloadend = () => this.setState({ imageFile: reader.result })
         reader.readAsDataURL(img);
 
     }
@@ -225,6 +225,21 @@ class CreateAnniversary extends Component {
                                 />
                             </Grid>
                             <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    multiline
+                                    rows="4"
+                                    id="customMessag"
+                                    label="Custom Message"
+                                    name="customMessage"
+                                    autoComplete="customMessage"
+                                    value={this.state.customMessage}
+                                    onChange={this.handleChange("customMessage")}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
                                 <input
                                     accept="image/*"
                                     className={classes.input}
@@ -248,21 +263,6 @@ class CreateAnniversary extends Component {
                                         Image Upload
                                     </Button>
                                 </label>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    multiline
-                                    rows="4"
-                                    id="customMessag"
-                                    label="Custom Message"
-                                    name="customMessage"
-                                    autoComplete="customMessage"
-                                    value={this.state.customMessage}
-                                    onChange={this.handleChange("customMessage")}
-                                />
                             </Grid>
 
                         </Grid>
