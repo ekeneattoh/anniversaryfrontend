@@ -77,7 +77,9 @@ class CreateAnniversary extends Component {
 
             show_spinner: false,
 
-            open: false
+            open: false,
+
+            msg_open: false
 
         };
 
@@ -98,7 +100,7 @@ class CreateAnniversary extends Component {
         event.preventDefault();
 
         //open a dialog box and show the spinner
-        this.setState({ open: true })
+        this.setState({ open: true });
         this.setState({ show_spinner: true });
 
         //prepare the anniversary date
@@ -116,17 +118,24 @@ class CreateAnniversary extends Component {
         };
         this.props.saveAnniversary(data).then(() => {
             //close the dialog box and hide the spinner
-            this.setState({ open: true })
+            this.setState({ open: true });
             this.setState({ show_spinner: false });
+
+            //open the message dialog
+            this.setState({ msg_open: true });
+
         });
 
     }
 
     clearApiMsg() {
         setTimeout(() => {
+            //close the dialog box
+            this.setState({ msg_open: false });
             this.props.clearAnniversaryMsg();
         }, 3000); //3 seconds
     }
+
 
     encodeImageFileAsURL = event => {
 
@@ -159,7 +168,7 @@ class CreateAnniversary extends Component {
                     </Typography>
 
                     {this.state.show_spinner ? (
-                        <Dialog  aria-labelledby="customized-dialog-title" open={this.state.open}>
+                        <Dialog aria-labelledby="customized-dialog-title" open={this.state.open}>
                             <DialogContent dividers>
                                 <CircularProgress className={classes.progress} color="secondary" />
                             </DialogContent>
@@ -168,17 +177,26 @@ class CreateAnniversary extends Component {
                     ) : null}
 
                     {msg ? (
-                        <Typography color="secondary" component="h1" variant="h5">
-                            {msg}
-                            {this.clearApiMsg()}
-                        </Typography>
+                        <Dialog aria-labelledby="customized-dialog-title" open={this.state.msg_open}>
+                            <DialogContent dividers>
+                                <Typography color="secondary" component="h1" variant="h5">
+                                    {msg}
+                                    {this.clearApiMsg()}
+                                </Typography>
+                            </DialogContent>
+                        </Dialog>
+
                     ) : null}
                     {error ? (
-                        <Typography color="error" component="h1" variant="h5">
-                            {error}
-                            {this.clearApiMsg()}
-                        </Typography>
-
+                        <Dialog aria-labelledby="customized-dialog-title" open={this.state.msg_open}>
+                            <DialogContent dividers>
+                                <Typography color="error" component="h1" variant="h5">
+                                    {error}
+                                    {this.clearApiMsg()}
+                                </Typography>
+                            </DialogContent>
+                        </Dialog>
+                        
                     ) : null}
 
                     <form className={classes.form} onSubmit={this.handleSaveAnniversary}>

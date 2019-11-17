@@ -109,8 +109,8 @@ class ViewAnniversaryMessage extends Component {
             fileName: this.state.referenceId.trim()
         };
         this.props.getAnniversaryData(data).then(() => {
-             //close the dialog box and hide the spinner
-             this.setState({ spinner_open: true })
+            //close the dialog box and hide the spinner
+            this.setState({ spinner_open: true })
             this.setState({ show_spinner: false });
             this.handleClickOpen();
         });
@@ -127,6 +127,8 @@ class ViewAnniversaryMessage extends Component {
 
     clearApiMsg() {
         setTimeout(() => {
+            //close the dialog box
+            this.setState({ open: false });
             this.props.clearAnniversaryMsg();
         }, 3000); //3 seconds
     }
@@ -187,10 +189,15 @@ class ViewAnniversaryMessage extends Component {
                     }
 
                     {error ? (
-                        <Typography color="error" component="h1" variant="h5">
-                            {error}
-                            {this.clearApiMsg()}
-                        </Typography>
+                        <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open}>
+                            <DialogContent dividers>
+                                <Typography color="error" component="h1" variant="h5">
+                                    {error}
+                                    {this.clearApiMsg()}
+                                </Typography>
+                            </DialogContent>
+                        </Dialog>
+
 
                     ) : null}
 
