@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import Dialog from '@material-ui/core/Dialog';
 import { withStyles } from "@material-ui/core/styles";
 
 //redux imports
@@ -42,6 +45,22 @@ const styles = theme => ({
 
 });
 
+//dialog
+const DialogTitle = withStyles(styles)(props => {
+    const { children, classes, onClose } = props;
+    return (
+        <MuiDialogTitle disableTypography className={classes.root}>
+            <Typography variant="h6">{children}</Typography>
+        </MuiDialogTitle>
+    );
+});
+
+const DialogContent = withStyles(theme => ({
+    root: {
+        padding: theme.spacing(2),
+    },
+}))(MuiDialogContent);
+
 class CreateAnniversary extends Component {
 
     constructor(props) {
@@ -56,7 +75,9 @@ class CreateAnniversary extends Component {
             customMessage: "",
             imageFile: "",
 
-            show_spinner: false
+            show_spinner: false,
+
+            open: false
 
         };
 
@@ -76,7 +97,8 @@ class CreateAnniversary extends Component {
 
         event.preventDefault();
 
-        //show the spinner
+        //open a dialog box and show the spinner
+        this.setState({ open: true })
         this.setState({ show_spinner: true });
 
         //prepare the anniversary date
@@ -93,6 +115,8 @@ class CreateAnniversary extends Component {
             customMessage: this.state.customMessage.trim()
         };
         this.props.saveAnniversary(data).then(() => {
+            //close the dialog box and hide the spinner
+            this.setState({ open: true })
             this.setState({ show_spinner: false });
         });
 
@@ -135,7 +159,12 @@ class CreateAnniversary extends Component {
                     </Typography>
 
                     {this.state.show_spinner ? (
-                        <CircularProgress className={classes.progress} color="secondary" />
+                        <Dialog  aria-labelledby="customized-dialog-title" open={this.state.open}>
+                            <DialogContent dividers>
+                                <CircularProgress className={classes.progress} color="secondary" />
+                            </DialogContent>
+                        </Dialog>
+
                     ) : null}
 
                     {msg ? (
