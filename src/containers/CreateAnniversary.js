@@ -108,12 +108,12 @@ class CreateAnniversary extends Component {
         const finalAnniversaryDate = anniversaryDateInput[1] + "-" + anniversaryDateInput[2]
 
         let data = {
-            clientName: this.state.clientName.trim().toUpperCase(),
+            clientName: this.state.clientName.trim(),
             clientEmail: this.state.clientEmail.trim(),
-            recipientName: this.state.recipientName.trim().toUpperCase(),
+            recipientName: this.state.recipientName.trim(),
             recipientEmail: this.state.recipientEmail.trim(),
             anniversaryDate: finalAnniversaryDate,
-            imageFile: this.state.imageFile.trim(),
+            imageFile: this.state.imageFile,
             customMessage: this.state.customMessage.trim()
         };
         this.props.saveAnniversary(data).then(() => {

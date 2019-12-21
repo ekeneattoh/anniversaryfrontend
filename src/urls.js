@@ -1,4 +1,10 @@
 //holds all url needed by the app
 
-export const ncheta_backend = "https://nchetabackend.herokuapp.com"; //heroku back end
-// export const ncheta_backend = "http://localhost:9000"; //heroku back end
+let NCHETA_BACKEND_URL = process.env.REACT_APP_NCHETA_DEV_BACKEND_URL
+
+if (process.env.NODE_ENV === 'production') {
+
+    NCHETA_BACKEND_URL = REACT_APP_NCHETA_PRD_BACKEND_URL
+}
+
+export const ncheta_backend = NCHETA_BACKEND_URL;
