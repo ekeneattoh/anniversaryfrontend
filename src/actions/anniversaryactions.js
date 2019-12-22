@@ -17,8 +17,6 @@ export function clearAnniversaryMsg() {
 
 export function saveAnniversary(data) {
 
-    // console.log(ncheta_backend)
-
     return function (dispatch) {
         return axios({
             method: 'post',

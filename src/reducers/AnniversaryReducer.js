@@ -21,7 +21,7 @@ export const reduceAnniversary = (state = anniversary_state, action) => {
       state.save_anniversary_api_err = null;
       return { ...state, save_anniversary_api_msg: msg };
     case SAVE_ANNIVERSARY_ERR:
-      let error = "Bad request...missing value";
+      let error = action.payload.response.data.result;
       return { ...state, save_anniversary_api_err: error };
     case CLEARANNIVERSARYMSG:
       state.save_anniversary_api_msg = null;
