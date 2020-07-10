@@ -12,11 +12,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import Dialog from '@material-ui/core/Dialog';
+import ImageUploader from 'react-images-upload';
 import { withStyles } from "@material-ui/core/styles";
 
 //redux imports
 import { connect } from "react-redux";
 import { saveAnniversary, clearAnniversaryMsg } from "../actions/anniversaryactions"
+import { clearApiMsg } from "../helpers/utils"
 
 const styles = theme => ({
 
@@ -86,6 +88,7 @@ class CreateAnniversary extends Component {
         // This binding is necessary to make `this` work in the callback
         // this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.onDrop = this.onDrop.bind(this);
     }
 
     handleChange = name => event => {
@@ -128,20 +131,15 @@ class CreateAnniversary extends Component {
 
     }
 
-    clearApiMsg() {
-        setTimeout(() => {
-            //close the dialog box
-            this.setState({ msg_open: false });
-            this.props.clearAnniversaryMsg();
-        }, 3000); //3 seconds
+    clearAnniversaryApiMsg() {
+        clearApiMsg(this, this.props.clearAnniversaryMsg);
     }
 
-
-    encodeImageFileAsURL = event => {
+    onDrop(picture) {
 
         const reader = new FileReader();
 
-        const img = event.target.files[0];
+        const img = picture[0];
 
         reader.onloadend = () => this.setState({ imageFile: reader.result })
         reader.readAsDataURL(img);
@@ -153,8 +151,6 @@ class CreateAnniversary extends Component {
         const { classes } = this.props;
         var msg = this.props.msg;
         var error = this.props.error;
-
-        // console.log(error)
 
         return (
             <Container component="main" maxWidth="xs">
@@ -181,7 +177,7 @@ class CreateAnniversary extends Component {
                             <DialogContent dividers>
                                 <Typography color="secondary" component="h1" variant="h5">
                                     {msg}
-                                    {this.clearApiMsg()}
+                                    {this.clearAnniversaryApiMsg()}
                                 </Typography>
                             </DialogContent>
                         </Dialog>
@@ -192,11 +188,11 @@ class CreateAnniversary extends Component {
                             <DialogContent dividers>
                                 <Typography color="error" component="h1" variant="h5">
                                     {error}
-                                    {this.clearApiMsg()}
+                                    {this.clearAnniversaryApiMsg()}
                                 </Typography>
                             </DialogContent>
                         </Dialog>
-                        
+
                     ) : null}
 
                     <form className={classes.form} onSubmit={this.handleSaveAnniversary}>
@@ -287,29 +283,18 @@ class CreateAnniversary extends Component {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <input
+                                <ImageUploader
+                                    withIcon={true}
+                                    buttonText='Add image'
                                     accept="image/*"
-                                    className={classes.input}
-                                    style={{ display: 'none' }}
                                     id="imageFile"
                                     name="imageFile"
-                                    multiple
-                                    type="file"
-                                    required
-                                    onChange={this.encodeImageFileAsURL}
+                                    onChange={this.onDrop}
+                                    imgExtension={['.jpg', 'jpeg', '.gif', '.png', '.gif']}
+                                    maxFileSize={5242880}
+                                    withPreview={true}
+                                    singleImage={true}
                                 />
-                                <label htmlFor="imageFile">
-                                    <Button
-                                        variant="contained"
-                                        component="span"
-                                        className={classes.button}
-                                        fullWidth
-                                        color="primary"
-                                    >
-
-                                        Image Upload
-                                    </Button>
-                                </label>
                             </Grid>
 
                         </Grid>
