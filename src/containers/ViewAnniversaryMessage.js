@@ -17,6 +17,7 @@ import { withStyles } from "@material-ui/core/styles";
 //redux imports
 import { connect } from "react-redux";
 import { getAnniversaryData, clearAnniversaryMsg } from "../actions/anniversaryactions"
+import { clearApiMsg } from "../helpers/utils"
 
 const styles = theme => ({
 
@@ -97,7 +98,7 @@ class ViewAnniversaryMessage extends Component {
         });
     };
 
-    handleGetnniversary = (event) => {
+    handleGetAnniversary = (event) => {
 
         event.preventDefault();
 
@@ -125,12 +126,9 @@ class ViewAnniversaryMessage extends Component {
         this.setState({ open: false })
     };
 
-    clearApiMsg() {
-        setTimeout(() => {
-            //close the dialog box
-            this.setState({ open: false });
-            this.props.clearAnniversaryMsg();
-        }, 3000); //3 seconds
+    clearAnniversaryError() {
+
+        clearApiMsg(this, this.props.clearAnniversaryMsg);
     }
 
 
@@ -193,7 +191,7 @@ class ViewAnniversaryMessage extends Component {
                             <DialogContent dividers>
                                 <Typography color="error" component="h1" variant="h5">
                                     {error}
-                                    {this.clearApiMsg()}
+                                    {this.clearAnniversaryError()}
                                 </Typography>
                             </DialogContent>
                         </Dialog>
@@ -201,7 +199,7 @@ class ViewAnniversaryMessage extends Component {
 
                     ) : null}
 
-                    <form className={classes.form} onSubmit={this.handleGetnniversary}>
+                    <form className={classes.form} onSubmit={this.handleGetAnniversary}>
                         <Grid container spacing={2}>
 
                             <Grid item xs={12}>
