@@ -12,6 +12,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
 import { withStyles } from "@material-ui/core/styles";
 
 //redux imports
@@ -52,6 +54,15 @@ const styles = theme => ({
     root: {
         margin: 0,
         padding: theme.spacing(2),
+    },
+
+    card: {
+        maxWidth: 345,
+    },
+
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
     },
 
 });
@@ -167,9 +178,13 @@ class ViewAnniversaryMessage extends Component {
                                 From {msg.clientName}
                             </DialogTitle>
                             <DialogContent dividers>
-                                <Typography gutterBottom>
-                                    <img src={msg.imageFile} alt="image" width="200" height="300" />
-                                </Typography>
+                                <Card className={classes.card}>
+                                    <CardMedia
+                                        className={classes.media}
+                                        image={msg.imageFile}
+                                        title="Paella dish"
+                                    />
+                                </Card>
                                 <Typography gutterBottom>
                                     {msg.customMessage}
                                 </Typography>
