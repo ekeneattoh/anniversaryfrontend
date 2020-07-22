@@ -179,11 +179,7 @@ class ViewAnniversaryMessage extends Component {
                             </DialogTitle>
                             <DialogContent dividers>
                                 <Card className={classes.card}>
-                                    <CardMedia
-                                        className={classes.media}
-                                        image={msg.imageFile}
-                                        title="Paella dish"
-                                    />
+                                    <img src={msg.imageFile} alt={msg.customMessage}/>
                                 </Card>
                                 <Typography gutterBottom>
                                     {msg.customMessage}
